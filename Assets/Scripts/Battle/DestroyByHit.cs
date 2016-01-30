@@ -29,7 +29,7 @@ public class DestroyByHit : MonoBehaviour
             case "Ball":
                 {
                     Destroy(other.gameObject);
-    
+                    GameObject clone = Instantiate(particles, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
                     Destroy(clone, 1.0f);
                     lives--;
                     if (lives == 0 && gameObject.tag == "Enemy")
