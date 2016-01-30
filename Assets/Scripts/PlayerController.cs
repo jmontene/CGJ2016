@@ -18,19 +18,29 @@ public class PlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 	}
 
+    void Update() {
+        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+        {
+
+            GameManager.Instance.setBombing(true);
+
+            nextFire = Time.time + fireRate;
+            GameObject clone = Instantiate(shot, rb.position + new Vector3(-1.0f, 0.0f, 0.3f), rb.rotation) as GameObject;
+            clone.transform.parent = rb.transform;
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate () {
 		float hMov = canMoveHorizontal ? Input.GetAxis ("Horizontal") : 0.0f;
 		float vMov = Input.GetAxis ("Vertical");
 
-		rb.velocity = new Vector3 (hMov * speed, 0.0f, vMov * speed);
+		rb.velocity = new Vector3 (vMov * speed, 0.0f, -hMov * speed);
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
+        
+        if (Time.time > nextFire)
         {
-            Debug.Log("sdfsdfsd");
-            nextFire = Time.time + fireRate;
-            GameObject clone = Instantiate(shot, rb.position+new Vector3(-0.65f,0.0f,0.3f), rb.rotation) as GameObject;
-            clone.transform.parent = rb.transform;
+            GameManager.Instance.setBombing(false);
         }
     }
 }

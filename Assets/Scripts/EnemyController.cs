@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
         _timer = 0;     
         horDir = 0;
         verDir = 0;
-        nextFire = 0.0f;
+        nextFire = Time.time + 1.5f;
     }
     
     void FixedUpdate() {
@@ -79,10 +79,10 @@ public class EnemyController : MonoBehaviour
 
 
         //Random shooting code
-        if (Random.value < shootRate && Time.time > nextFire)
+        if (Random.value < shootRate && Time.time > nextFire && !GameManager.Instance.profAware()) 
         {
             nextFire = Time.time + fireRate;
-            GameObject clone = Instantiate(shot, rb.position + new Vector3(0.0f, 0.0f, 0.3f), rb.rotation) as GameObject;
+            GameObject clone = Instantiate(shot, rb.position + new Vector3(1.0f, 0.0f, 0.3f), rb.rotation) as GameObject;
             clone.transform.parent = rb.transform;
         }
 

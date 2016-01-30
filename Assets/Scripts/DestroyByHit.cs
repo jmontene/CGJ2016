@@ -4,6 +4,7 @@ using System.Collections;
 public class DestroyByHit : MonoBehaviour
 {
     private float score=0;
+    public int lives = 3;
     void OnTriggerEnter(Collider other)
     {
  
@@ -13,9 +14,7 @@ public class DestroyByHit : MonoBehaviour
                     return;
                 }
             case "Enemy":{
-                    Destroy(other.gameObject);
                     Destroy(gameObject);
-                    score += 250;
                     break;
                 }
             case "Player":
@@ -27,7 +26,13 @@ public class DestroyByHit : MonoBehaviour
             case "Ball":
                 {
                     Destroy(other.gameObject);
-                    Destroy(gameObject);
+                    lives--;
+                    if (lives == 0 && gameObject.tag == "Enemy")
+                    {
+                        Destroy(gameObject);
+                        score += 250;
+                    }
+
                     break;
                 }
         }
