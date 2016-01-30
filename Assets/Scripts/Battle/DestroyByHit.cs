@@ -34,7 +34,7 @@ public class DestroyByHit : MonoBehaviour
                     if (lives == 0 && gameObject.tag == "Enemy")
                     {
                         Destroy(gameObject);
-                        score += 250;
+                        GameManager.Instance.AddPoints(500);
                     }
 
                     break;
