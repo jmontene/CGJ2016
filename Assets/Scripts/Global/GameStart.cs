@@ -19,4 +19,8 @@ public class GameStart : MonoBehaviour {
     public void StartGame() {
         SceneManager.LoadScene(startScene);
     }
+
+    public void GoToScene(string sceneName) {
+        SceneManager.LoadScene(sceneName);
+    }
 }

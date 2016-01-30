@@ -40,8 +40,4 @@ public class GameManager : UnitySingleton<GameManager> {
         wasted.enabled = false;
         SceneManager.LoadScene(nextScene);
     }
-
-    public void GoToScene(string sceneName) {
-        SceneManager.LoadScene(sceneName);
-    }
 }

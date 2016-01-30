@@ -82,12 +82,12 @@ public class RunnerManager : UnitySingleton<RunnerManager> {
 
     void Die() {
         EndStage();
-        GameManager.Instance.Die("End");
+        GameManager.Instance.Die("bombaInstrucciones");
     }
 
     public void Win() {
         EndStage();
-        StartCoroutine(GameManager.Instance.EndStage("End"));
+        StartCoroutine(GameManager.Instance.EndStage("bombaInstrucciones"));
     }
 
     void EndStage() {
