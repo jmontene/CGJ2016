@@ -5,7 +5,7 @@ public class DoorController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision coll)
 	{
-        Debug.Log("Collided");
+		GameManager.Instance.AddPoints (LibraryManager.Instance.Score);
 		StartCoroutine(GameManager.Instance.EndStage ("runnerInstrucciones"));
 	}
 }

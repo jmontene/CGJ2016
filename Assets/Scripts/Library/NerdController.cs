@@ -99,6 +99,10 @@ public class NerdController : MonoBehaviour {
 
 	void See()
 	{
+		if (LibraryManager.Instance.Score != 0)
+			LibraryManager.Instance.Score -= 400;
+		else
+			GameManager.Instance.Die ("runnerInstrucciones");
 		Destroy (gameObject);
 	}
 }
