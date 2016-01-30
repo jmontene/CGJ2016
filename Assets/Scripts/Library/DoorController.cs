@@ -3,8 +3,9 @@ using System.Collections;
 
 public class DoorController : MonoBehaviour {
 
-	void OnCollissionEnter(Collision coll)
+	void OnCollisionEnter(Collision coll)
 	{
-		GameManager.Instance.EndStage ("Runner");
+        Debug.Log("Collided");
+		StartCoroutine(GameManager.Instance.EndStage ("Runner"));
 	}
 }
