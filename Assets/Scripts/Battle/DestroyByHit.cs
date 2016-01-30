@@ -14,11 +14,13 @@ public class DestroyByHit : MonoBehaviour
                     return;
                 }
             case "Enemy":{
+                    GameManager.Instance.Die("End");
                     Destroy(gameObject);
                     break;
                 }
             case "Player":
                 {
+                    GameManager.Instance.Die("End");
                     Destroy(other.gameObject);
                     Destroy(gameObject);
                     break;
