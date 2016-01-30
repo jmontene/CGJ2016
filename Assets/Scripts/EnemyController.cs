@@ -7,13 +7,18 @@ public class EnemyController : MonoBehaviour
     //Private variables
     private Rigidbody rb;
     private int _timer;         //Will be used inside the code to calculate time jumps
-    private int horDir;
-    private int verDir;
+    private int horDir;         //-1, 0 OR 1, depending on direction to move
+    private int verDir;         //See above
+    private float nextFire;     //Remaining time to the next fire
+    private Vector3 startPos;   //Used to create a bounding box so that the character moves on a restricted area
 
     //Public variables
     public float maxSpeed;
-    public int timer;          //So that the user can set it outside the code
-    
+    public int timer;           //So that the user can set it outside the code
+    public float fireRate;      //Minimum time used between bullets
+    public float shootRate;     //Rate at which it fires
+    public GameObject shot;
+
 
     // Use this for initialization
     void Awake() {
@@ -21,10 +26,13 @@ public class EnemyController : MonoBehaviour
         _timer = 0;     
         horDir = 0;
         verDir = 0;
+        nextFire = 0.0f;
     }
     
     void FixedUpdate() {
-        
+
+
+        //Random movement code
         if (_timer == 0 ) { //Decides if he should move
 
             if (Random.value < 0.2) {
@@ -55,7 +63,7 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            else {
+            else {  //Doesn't move at all
                 verDir = 0;
                 horDir = 0;
                 _timer = timer;
@@ -63,11 +71,23 @@ public class EnemyController : MonoBehaviour
 
         }
 
-        
+        //Makes move attempts
         if (_timer != 0) {
             _timer--;
             rb.velocity = new Vector3(horDir*maxSpeed, 0.0f,verDir*maxSpeed );
         }
 
+
+        //Random shooting code
+        if (Random.value < shootRate && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            GameObject clone = Instantiate(shot, rb.position + new Vector3(0.0f, 0.0f, 0.3f), rb.rotation) as GameObject;
+            clone.transform.parent = rb.transform;
+        }
+
     }
+
+
+
 }
