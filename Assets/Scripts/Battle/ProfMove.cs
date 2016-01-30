@@ -31,6 +31,7 @@ public class ProfMove : MonoBehaviour
         }
         BattleManager.Instance.setProfAware(true);
         if (BattleManager.Instance.getBombing()) {
+            GameManager.Instance.Die("End");
             Destroy(GameObject.FindGameObjectWithTag("Player"), 0.0f);
         }
         rb.velocity = transform.forward * speed;

@@ -81,19 +81,18 @@ public class RunnerManager : UnitySingleton<RunnerManager> {
     }
 
     void Die() {
-        wasted.enabled = true;
-        StartCoroutine(EndStage());
+        EndStage();
+        GameManager.Instance.Die("End");
     }
 
     public void Win() {
-        StartCoroutine(EndStage());
+        EndStage();
+        GameManager.Instance.EndStage("End");
     }
 
-    IEnumerator EndStage() {
+    void EndStage() {
         stage.stop();
-        yield return new WaitForSeconds(3.0f);
         GameManager.Instance.AddPoints(points);
-        SceneManager.LoadScene("End");
     }
 
     void generateObstacles() {
