@@ -29,8 +29,8 @@ public class ProfMove : MonoBehaviour
         if (Time.time <= nextLook - lookDelay/4) {
             return;
         }
-        GameManager.Instance.setProfAware(true);
-        if (GameManager.Instance.getBombing()) {
+        BattleManager.Instance.setProfAware(true);
+        if (BattleManager.Instance.getBombing()) {
             Destroy(GameObject.FindGameObjectWithTag("Player"), 0.0f);
         }
         rb.velocity = transform.forward * speed;

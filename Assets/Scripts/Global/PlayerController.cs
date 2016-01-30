@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	public bool canMoveHorizontal;
+    public bool inBattle;
     public float fireRate = 1.0F;
     private float nextFire = 0.0F;
 
@@ -19,10 +20,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
     void Update() {
-        if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
-        {
+        if (inBattle && Input.GetButtonDown("Fire1") && Time.time > nextFire){
 
-            GameManager.Instance.setBombing(true);
+            BattleManager.Instance.setBombing(true);
 
             nextFire = Time.time + fireRate;
             GameObject clone = Instantiate(shot, rb.position + new Vector3(-1.0f, 0.0f, 0.3f), rb.rotation) as GameObject;
@@ -32,15 +32,21 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
-		float hMov = canMoveHorizontal ? Input.GetAxis ("Horizontal") : 0.0f;
-		float vMov = Input.GetAxis ("Vertical");
 
-		rb.velocity = new Vector3 (vMov * speed, 0.0f, -hMov * speed);
+        if (inBattle) {
+            float hMov = canMoveHorizontal ? Input.GetAxis("Horizontal") : 0.0f;
+            float vMov = Input.GetAxis("Vertical");
+            rb.velocity = new Vector3(vMov * speed, 0.0f, -hMov * speed);
+        } else {
+            float hMov = canMoveHorizontal ? Input.GetAxis("Horizontal") : 0.0f;
+            float vMov = Input.GetAxis("Vertical");
+            rb.velocity = new Vector3(hMov * speed, 0.0f, vMov * speed);
+        }
 
         
-        if (Time.time > nextFire)
+        if (inBattle && Time.time > nextFire)
         {
-            GameManager.Instance.setBombing(false);
+            BattleManager.Instance.setBombing(false);
         }
     }
 }

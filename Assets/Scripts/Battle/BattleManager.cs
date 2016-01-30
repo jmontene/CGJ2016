@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : UnitySingleton<GameManager> {
+public class BattleManager : UnitySingleton<BattleManager> {
 
     private bool isBombing;
     private bool isProfAware;
     private bool noP;
 
 	// Use this for initialization
-	void Awake () {
+	public override void Awake () {
         base.Awake();
         isBombing = false;
         isProfAware = false;

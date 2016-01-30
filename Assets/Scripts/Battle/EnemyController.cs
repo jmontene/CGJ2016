@@ -79,7 +79,7 @@ public class EnemyController : MonoBehaviour
 
 
         //Random shooting code
-        if (Random.value < shootRate && Time.time > nextFire && !GameManager.Instance.profAware()) 
+        if (Random.value < shootRate && Time.time > nextFire && !BattleManager.Instance.profAware()) 
         {
             nextFire = Time.time + fireRate;
             GameObject clone = Instantiate(shot, rb.position + new Vector3(1.0f, 0.0f, 0.3f), rb.rotation) as GameObject;
