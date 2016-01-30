@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour {
 
+    public string startScene;
+
 	// Use this for initialization
 	void Start () {
 
@@ -15,6 +17,6 @@ public class GameStart : MonoBehaviour {
 	}
 
     public void StartGame() {
-        SceneManager.LoadScene("escenasbombas");
+        SceneManager.LoadScene(startScene);
     }
 }

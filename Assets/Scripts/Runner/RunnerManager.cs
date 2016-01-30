@@ -87,7 +87,7 @@ public class RunnerManager : UnitySingleton<RunnerManager> {
 
     public void Win() {
         EndStage();
-        GameManager.Instance.EndStage("End");
+        StartCoroutine(GameManager.Instance.EndStage("End"));
     }
 
     void EndStage() {
